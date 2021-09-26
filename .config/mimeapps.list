@@ -23,4 +23,4 @@ x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/ftp=firefox.desktop;
 application/json=VSCodium.desktop
 application/pdf=org.pwmt.zathura.desktop;
-text/plain=nvim.desktop
+text/plain=nvim.desktop;

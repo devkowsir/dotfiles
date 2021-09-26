@@ -1,0 +1,222 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+command_timeout = 500
+
+
+###############################################################################
+# Enabled Modules
+
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[ﰲ](bold #98C379)"     # The "success_symbol" segment is being set to "➜" with the color "bold bright-white"
+error_symbol = "[](bold #DF2828)"
+vicmd_symbol = "[](bold #98C379)"
+
+
+[directory]
+style = "black #C678DD"
+
+
+[git_branch]
+style = "bold #616E88"
+
+
+[git_status]
+style = "bold #8BB6B6"
+
+
+[cmd_duration]
+
+
+
+
+###############################################################################
+# Disabled Modules
+
+
+[git_state]
+disabled = true
+
+
+[git_commit]
+disabled = true
+
+
+[hg_branch]
+disabled = true
+
+
+[hostname]
+disabled = true
+
+
+[username]
+disabled = true
+
+
+[shlvl]
+disabled = true
+
+
+[docker_context]
+disabled = true
+
+
+[package]
+disabled = true
+
+
+[cmake]
+disabled = true
+
+
+[dart]
+disabled = true
+
+
+[dotnet]
+disabled = true
+
+
+[elixir]
+disabled = true
+
+
+[elm]
+disabled = true
+
+
+[erlang]
+disabled = true
+
+
+[golang]
+disabled = true
+
+
+[helm]
+disabled = true
+
+
+[java]
+disabled = true
+
+
+[julia]
+disabled = true
+
+
+[kotlin]
+disabled = true
+
+
+[nim]
+disabled = true
+
+
+[nodejs]
+disabled = true
+
+
+[ocaml]
+disabled = true
+
+
+[perl]
+disabled = true
+
+
+[php]
+disabled = true
+
+
+[purescript]
+disabled = true
+
+
+[python]
+disabled = true
+
+
+[ruby]
+disabled = true
+
+
+[rust]
+disabled = true
+
+
+[swift]
+disabled = true
+
+
+[terraform]
+disabled = true
+
+
+[vagrant]
+disabled = true
+
+
+[zig]
+disabled = true
+
+
+[nix_shell]
+disabled = true
+
+
+[conda]
+disabled = true
+
+
+[memory_usage]
+disabled = true
+
+
+[aws]
+disabled = true
+
+
+[gcloud]
+disabled = true
+
+
+[openstack]
+disabled = true
+
+
+[env_var]
+disabled = true
+
+
+[crystal]
+disabled = true
+
+
+[custom]
+disabled = true
+
+
+[line_break]
+disabled = true
+
+
+[lua]
+disabled = true
+
+
+[jobs]
+disabled = true
+
+
+[battery]
+disabled = true
+
+
+[time]
+disabled = true
+
+
+[status]
+disabled = true
+

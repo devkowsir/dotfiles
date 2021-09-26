@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ ! "$(whoami)" = "root" ] && notify-send "Plz run with sudo privileges" && exit 1
+user=$(dmenu -p "Enter MYSQL username: " <&-)
+pass=$(dmenu -P -p "Enter Mysql Password for $user" <&-)
+mysql -u $user --password=$pass -e exit || exit 1
+echo "$user	$pass" >> $XDG_DATA_HOME/WPUserPassword
+chmod 400 $XDG_DATA_HOME/WPUserPassword
+chown root:nobody $XDG_DATA_HOME/WPUserPassword

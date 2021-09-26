@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Transmission Web
+GenericName=BitTorrent Client
+Comment=Download and share files over BitTorrent
+Keywords=torrents;magnets;
+# Exec=firefox localhost:9091
+Exec=brave 'http://localhost:9091'
+Icon=electorrent
+StartupNotify=true
+MimeType=application/x-bittorrent;x-scheme-handler/magnet
+Categories=Network;FileTransfer;P2P;GTK
+X-Ubuntu-Gettext-Domain=transmission
+X-AppInstall-Keywords=torrent

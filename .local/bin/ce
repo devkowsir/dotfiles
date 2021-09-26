@@ -1,0 +1,22 @@
+#!/bin/sh
+
+files=".zprofile
+.config/alacritty/alacritty.yml
+.config/awesome/rc.lua
+.config/bspwm/bspwmrc
+.config/dmenu/config.h
+.config/dunst/dunstrc
+.config/kitty/kitty.conf
+.config/lf/lfrc
+.config/nvim/init.vim
+.config/picom/picom.conf
+.config/polybar/config.ini
+.config/qtile/config.py
+.config/sxhkd/sxhkdrc
+.config/x11/Xinitrc
+.config/x11/Xresources
+.config/zsh/.zshrc
+.config/zsh/aliasrc"
+
+file=$(printf "$files" | fzf)
+[ ! -z $file ] && nvim $HOME/$file

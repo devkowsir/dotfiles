@@ -1,0 +1,35 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit 1
+project=$1
+dir=/data/http/$1
+
+create() {
+	UPF=/home/kawsar/.local/share/WPUserPassword
+	[ ! -f $UPF ] && setUpUserPass
+	user=$(cat $UPF | cut -f1) && pass=$(cat $UPF | cut -f2)
+
+	[ ! -d $dir ] && cp -r /data/WP/wordpress $dir
+	mv $dir/wp-config-sample.php $dir/wp-config.php
+	sed -i "s/database_name_here/$project/;s/username_here/$user/;s/password_here/$pass/" $dir/wp-config.php
+  chown http:http $dir -R
+  chmod 755 $(find $dir -type d)
+  chmod 664 $(find $dir -type f)
+  chmod g+s $dir/
+	
+	mysql -e "create database $project;grant all privileges on $project.* to $user@localhost;flush privileges"
+}
+
+remove() {
+	rm -rf $dir
+
+	mysql -e "drop database $project"
+}
+
+if [ "$2" = "create" ];then
+	create
+elif [ "$2" = "remove" ];then
+	remove
+else
+	echo "only 'create' or 'remove' is allowed as 2nd argument"
+fi

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Torrent Add
+Exec=/usr/bin/env transmissionAdd %U
+NoDisplay=true
+Keywords=torrents;downloading;uploading;share;sharing
+MimeType=application/x-bittorrent;x-scheme-handler/magnet
+Categories=Network;FileTransfer;P2P;GTK
+X-Ubuntu-Gettext-Domain=transmission
+X-AppInstall-Keywords=torrent

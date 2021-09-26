@@ -1,0 +1,92 @@
+#!/bin/zsh
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+  cp="cp -iv" \
+  mv="mv -iv" \
+  rm="rm -vI" \
+  md="mkdir -pv" \
+  ffmpeg="ffmpeg -hide_banner"\
+
+# Git
+alias \
+  gits="git status" \
+  gitc="git commit" \
+  gitp="git push"
+
+# Colorize commands when possible.
+alias \
+  ls="ls -h --color=auto --group-directories-first" \
+  grep='grep --color=auto' \
+  egrep='egrep --color=auto' \
+  fgrep='fgrep --color=auto' \
+  diff="diff --color=auto" \
+  ccat="highlight --out-format=ansi" \
+  ll="ls -lAX" \
+  lh="ls -ldA .*"\
+
+# These common commands are just too long! Abbreviate them.
+alias \
+  ka="killall" \
+  v="nvim" \
+  sv="sudo nvim" \
+  z="zathura" \
+  pacfd="paru -Ss" \
+  pacin="paru -S" \
+  pacrem="paru -Rns" \
+  plz="sudo -i su" \
+
+# moving to parent directories
+alias \
+  1='cd -' \
+  .='cd ../'\
+  ..='cd ../..' \
+  ...='cd ../../../' \
+
+# Change directory
+alias \
+  gc="cd ~/.config/" \
+  gb="cd ~/.local/bin" \
+  gk="cd ~/.local/share/kawsar/" \
+  gwp="cd ~/.local/share/kawsar/plugins" \
+  gwt="cd ~/.local/share/kawsar/themes" \
+  ggc="cd ~/.cache/dotfiles/.config" \
+  gglb="cd ~/.cache/dotfiles/.local/bin" \
+  gglk="cd ~/.cache/dotfiles/.local/share/kawsar" \
+
+# change gpg home dir
+alias \
+  gpg="gpg --homedir $XDG_DATA_HOME/gnupg"\
+  gpg2="gpg2 --homedir $XDG_DATA_HOME/gnupg"\
+  gpg-agent="gpg-agent --homedir $XDG_DATA_HOME/gnupg"\
+  gpgconf="gpgconf --homedir $XDG_DATA_HOME/gnupg"\
+  gpg-connect-agent="gpg-connect-agent --homedir $XDG_DATA_HOME/gnupg"\
+  gpgsm="gpgsm --homedir $XDG_DATA_HOME/gnupg"\
+
+# Starting and stoping services
+alias \
+  kb-start="systemctl --user start keybase.service kbfs.service" \
+  kb-status="systemctl --user status keybase.service kbfs.service" \
+  kb-restart="systemctl --user restart keybase.service kbfs.service" \
+  kb-stop="systemctl --user stop keybase.service kbfs.service" \
+  ws-start="sudo systemctl start httpd.service mariadb.service" \
+  ws-status="systemctl status httpd.service mariadb.service" \
+  ws-restart="sudo systemctl restart httpd.service mariadb.service" \
+  ws-stop="sudo systemctl stop httpd.service mariadb.service" \
+
+# Start using trash and stop using rm
+ alias \
+  rm="echo 'Using trash-cli instead of rm.';trash-put -f"\
+  trl="trash-list"\
+  tre="trash-empty"\
+  trp="trash-put"\
+  trr="trash-restore"\
+  trR="trash-rm"\
+
+
+# Random
+alias \
+  wget="wget --hsts-file $XDG_CONFIG_HOME/wget/wget-hsts" \
+  cwall="xwallpaper --zoom ~/.config/dark/*.jpg"\
+  scrot="scrot -z"\
+  lf="lfrun"\
+  clean-st="ls | grep \"orig\|rej\|config.h\" | xargs rm" \

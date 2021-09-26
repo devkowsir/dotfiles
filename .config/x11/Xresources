@@ -1,0 +1,6 @@
+! COLORS FOR SXIV
+Sxiv.foreground: #EBEBEB 
+Sxiv.background: #292C3E
+Sxiv.font: JetBrainsMono Nerd Font:style=bold:size=11
+
+#include "/home/kawsar/.config/x11/Xresources-Themes/dark/Argonaut"

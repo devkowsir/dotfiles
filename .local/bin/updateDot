@@ -1,0 +1,27 @@
+#!/bin/sh
+
+n=0
+cd $XDG_CACHE_HOME/dotfiles
+seperator="######################################################################"
+
+files=$(find -type f | grep -v .git | sed 's/\.\///')
+
+for i in $files;do
+    if ! diff --color=auto "$HOME"/"$i" "$i";then
+        echo $seperator;
+        echo "Enter commit message for $i: "
+        read msg
+        echo $seperator
+        if [ ! -z "$msg" ]; then
+        [ -f "$HOME"/"$i" ] && cp -f "$HOME"/"$i" "$i" || git rm $i
+            git commit -m "$msg" $i
+            n=1
+        fi
+    fi
+done
+
+if [ $n -eq 1 ];then
+    git push
+else
+    echo "You are already up to date"
+fi

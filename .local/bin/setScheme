@@ -1,0 +1,24 @@
+#!/bin/sh
+
+xresources_file="$HOME/.config/x11/Xresources"
+theme_dir="$HOME/.config/x11/Xresources-Themes"
+type=$(echo -e "dark\nlight" | dmenu -p "select theme type")
+[ -z $type ] && exit 1
+cd $theme_dir/$type
+theme=$(ls | dmenu -p "select theme to apply")
+[ -z $theme ] && exit 1
+sed -i "/include/{s|\".*\"|\"$XDG_CONFIG_HOME/x11/Xresources-Themes/$type/$theme\"|}" $xresources_file
+xrdb -load $xresources_file
+polybar-msg cmd restart
+
+background=$(xrdb -get "*.background")
+foreground=$(xrdb -get "*.foreground")
+primary=$(xrdb -get "*.primary" || echo '#A0E521')
+
+echo -e "*{
+  background:       "$background"DD;
+  background-alt:   "$background"00;
+  background-bar:   "$foreground"15;
+  foreground:       "$foreground"DD;
+  primary:          "$primary"66;
+}" > $HOME/.config/rofi/colors.rasi

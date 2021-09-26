@@ -1,0 +1,35 @@
+#!/bin/sh
+
+storeDir=/data/WP
+dir=/data/http
+
+while getopts w:t:p: options; do
+	case $options in
+		w) websites=$OPTARG;;
+		t) themes=$OPTARG;;
+		p) plugins=$OPTARG;;
+	esac
+done
+
+install() {
+	find $storeDir/$1 -type f | grep "/$2[0-9.]*zip$" > /dev/null || \
+		dlUrl=$(wget -q -O - wordpress.org/"$1"s/$2 | grep downloadUrl | cut -d \" -f4) && \
+		( [ ! -z $dlUrl ] && wget -q -P $storeDir/$1/ $dlUrl ) || echo "$1 $2 not found"
+
+	[ -d $dir/$website/wp-content/"$1"s/$2 ] && rm -rf $dir/$website/wp-content/"$1"s/$2
+	unzip $(find $storeDir/$1 -type f | grep "/$2[0-9.]*zip$") -d $dir/$website/wp-content/"$1"s/ > /dev/null
+	chmod 755 $(find $dir/$website/wp-content/"$1"s/$2 -type d)
+	chmod 644 $(find $dir/$website/wp-content/"$1"s/$2 -type f)
+	chown http:http $dir/$website/wp-content/"$1"s/$2 -R
+}
+
+for website in $websites;do
+	if [ -d $dir/$website ];then
+		for theme in $themes;do
+			install theme $theme
+		done
+		for plugin in $plugins;do
+			install plugin $plugin
+		done
+	fi
+done

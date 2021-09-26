@@ -1,0 +1,13 @@
+#!/bin/sh
+
+## This script removes projects.
+
+[ -z "$(ls /data/http/)" ] && notify-send "No valid projects exist to remove" && exit 0
+
+project=$( ls /data/http | dmenu -r -i -p "Choose the project to delete." )
+
+[ "$(printf "No\nYes" | dmenu -r -p "Are you sure?" )" = "Yes" ] || exit 0; 
+
+sudo -A modifyProject $project remove
+
+notify-send "projectd database '$project' and directory '/data/http/$project'"

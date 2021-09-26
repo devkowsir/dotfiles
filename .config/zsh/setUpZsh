@@ -1,0 +1,12 @@
+#!/bin/sh
+
+su -c "\
+  pacman -S --needed zsh zsh-autosuggestions zsh-syntax-highlighting starship\
+  grep "ZDOTDIR" /etc/zsh/zshenv || echo 'export ZDOTDIR="$HOME/.config/zsh"' >> /etc/zsh/zshenv"
+
+mkdir -p ~/.config
+cp -r ./ ~/.config/
+cd ~/.config/zsh
+rm ./setUpZsh
+curl -LO https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.pl
+chmod +x fm6000.pl

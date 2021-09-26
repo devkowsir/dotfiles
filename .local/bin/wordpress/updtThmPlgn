@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# ms=mainStorage, ps=projectStorage
+ms=/data/WP
+ps=/data/http
+
+update() {
+	latest=$(wget -q -O - wordpress.org/"$1"/"$2" | grep downloadUrl | sed 's/.*\///g;s/^[a-z0-9-]*\.//;s/\.zip.*$//')
+ 
+	if [ "$latest" != "$3" ];then
+		echo "updating $1 $2..."
+		wget -q -P "$ms"/"$1" https://downloads.wordpress.org/"$1"/"$2"."$latest".zip && \
+			rm -v "$ms"/"$1"/"$2"."$3".zip && \
+			for j in $(find "$ps"/*/wp-content/"$1"s -maxdepth 1 -type d | grep "$2$");do
+				[ -d "$j".old ] && rm -rf "$j".old && echo "removed directory $j.old"
+				mv -v "$j" "$j".old
+				unzip -q "$ms"/"$1"/"$2"."$latest".zip -d $(echo "$j" | grep -o "^.*/") && echo "done updatding $1 $2"
+			done
+	fi
+}
+
+for i in $(find "$ms"/plugin "$ms"/theme -maxdepth 1 -type f);do
+	update $(echo "$i" | sed "s/^\/data\/WP\/\|.zip$//g;s/\./\t/;s/\//\t/")
+done

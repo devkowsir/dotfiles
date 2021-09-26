@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pacman -Qqn >~/.local/share/kawsar/pacman-packages
+pacman -Qqm >~/.local/share/kawsar/paru-packages

@@ -1,0 +1,26 @@
+[Added Associations]
+x-scheme-handler/magnet=torrent.desktop;
+application/x.bittorrent=torrent.desktop;
+image/svg+xml=gimp.desktop;firefox.desktop;
+application/x-php=nvim.desktop;vscodium-bin.desktop;
+inode/directory=nemo.desktop;
+image/jpeg=sxiv.desktop;
+text/plain=nvim.desktop;
+application/xml=nvim.desktop;
+video/x-matroska=smplayer.desktop;mpv.desktop;
+image/png=brave-browser.desktop;
+
+[Default Applications]
+video/x-matroska=mpv.desktop
+video/mp4=mpv.desktop;
+image/gif=mpvgif.desktop
+image/png=sxiv.desktop;
+image/jpeg=sxiv.desktop
+text/html=firefox.desktop;
+text/xml=firefox.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/ftp=firefox.desktop;
+application/json=VSCodium.desktop
+application/pdf=org.pwmt.zathura.desktop;
+text/plain=nvim.desktop

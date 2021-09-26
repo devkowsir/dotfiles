@@ -1,0 +1,9 @@
+[Unit]
+Description=Timing wordpress theme and plugin service in a regular basis.
+
+[Timer]
+OnCalendar=*-*-* 12:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

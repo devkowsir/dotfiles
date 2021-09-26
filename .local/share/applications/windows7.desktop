@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Windows7(Virtualbox)
+Comment=Starts the VirtualBox machine windows7
+Type=Application
+Exec=/usr/lib/virtualbox/VirtualBoxVM --comment "windows7" --startvm "{f45f9e4b-9ec2-4329-98ac-cbdc89dd36fd}"
+Icon=distributor-logo-windows

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cp -f $1 $HOME/.config/wall.png
+xwallpaper --zoom $HOME/.config/wall.png

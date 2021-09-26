@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=MPVGif
+NoDisplay=true
+Exec=mpv --loop=inf %U
+Hidden=true

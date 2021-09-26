@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Pass the file name as 1st argument.
+cat "$1" | xclip -selection clipboard -target $(mimetype -b "$1")

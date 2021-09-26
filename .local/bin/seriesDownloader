@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Pass the link of ftp page which contain all the video download links. e.g. seriesDownloader "your link in this quotation"
+
+links=$(wget -q -O - "$1" | grep "VID" | grep -o "href=\"[^\"]*\"" | cut -d \" -f2 )
+
+for i in $links;do
+	wget "$1/$i"
+done

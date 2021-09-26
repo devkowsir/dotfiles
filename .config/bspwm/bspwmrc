@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# #8BB6B6 #98C379
+
+pidof sxhkd || sxhkd &
+xsetroot -cursor_name arrow &
+
+bspc monitor -d                       '1' '2' '3' '4' '5'
+bspc config border_width              2
+bspc config focused_border_color      \#C678DD
+bspc config normal_border_color       \#616E88
+
+bspc config window_gap           			5
+bspc config focus_follows_pointer     true
+
+bspc config split_ratio               0.52
+bspc config borderless_monocle        true
+bspc config gapless_monocle           true
+
+
+##################
+## Window rules ##
+##################
+
+bspc rule -r "*"
+
+bspc rule -a VSCodium desktop='^3'
+bspc rule -a firefox follow=off desktop='^2'
+bspc rule -a Brave-browser follow=off desktop='^2'
+bspc rule -a Chromium follow=off desktop='^2'
+bspc rule -a "VirtualBox Manager follow=off" desktop='^4'
+bspc rule -a "mpv" follow=off desktop='^4'
+bspc rule -a "VirtualBox Machine" follow=off desktop='^5'
+bspc rule -a VirtualBoxVM follow=off desktop='^5'
+
+## need to be floating
+floating="Galculator Sxiv Gparted Preferences dialog menu pop-up task_dialog" 
+
+for i in $floating; do
+        bspc rule -a $i state=floating follow=on
+done
+$HOME/.config/polybar/launch.sh &

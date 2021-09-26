@@ -1,0 +1,22 @@
+#!/bin/sh
+# What this script does :
+# -> Getting project name and project name validation.
+# -> And then Create the provided project.
+
+[ ! $HOME/.local/share/WPUserPassword ] && echo "Run setUpUserPass with Sudo to run this script." && exit 1
+
+projectname () { 
+	project=$( dmenu -p "$1" <&- )
+	if [ -z "$project" ]; then
+		notify-send "Empty project name. Exiting..." && exit 0
+	elif [ "$(echo "$project" | grep "^[a-z][a-z_]*[a-z0-9]$")" = "" ]; then
+		projectname "Only small letter, underscore(in the middle) and numbers at the end (optional) are allowed. Try again."
+	elif [ "$(ls /data/http | grep "$project")" = "$project" ]; then
+		projectname "This project already exists. Try again."
+	fi
+}
+projectname "Enter a new project name."
+
+sudo -A modifyProject $project create
+
+notify-send "Created database '$project' and created project folder '/data/http/$project'"

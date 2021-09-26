@@ -1,0 +1,7 @@
+#!/bin/sh
+
+path=$(find $PASSWORD_STORE_DIR -name "*.gpg"  | \
+  sed -r "s|$PASSWORD_STORE_DIR/||;s/.gpg$//" | \
+  fzf +m);
+
+[ ! -z "$path" ] && pass "$path"

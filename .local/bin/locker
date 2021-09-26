@@ -1,0 +1,7 @@
+#!/bin/sh
+
+flags="--detect-sleep --not-when-audio --not-when-fullscreen --timer"
+
+xset s 180 # Turn off display after 180 seconds
+xidlehook $flags 300 "lock" - & # Lock System after 300 seconds
+xidlehook $flags 600 "systemctl suspend" - & # Sleep System after 600 seconds

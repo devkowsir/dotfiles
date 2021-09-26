@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if pidof ibus-daemon >/dev/null; then
+  ibus exit
+else
+  ibus-daemon -drxs
+  sleep 1
+  ibus engine ibus-avro
+fi

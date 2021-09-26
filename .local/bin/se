@@ -1,0 +1,5 @@
+#!/bin/sh
+
+script=$(find "$HOME/.local/bin" -type f | sed 's/^.*\///' | fzf)
+
+[ ! -z $script ] && nvim $(find "$HOME/.local/bin" -type f -name "$script")

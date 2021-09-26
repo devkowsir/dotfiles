@@ -1,0 +1,8 @@
+[Unit]
+Description=Update wordpress themes and plugins.
+
+[Service]
+ExecStart=/home/kawsar/.local/bin/wordpress/updtThmPlgn
+User=http
+Group=http
+

@@ -1,0 +1,14 @@
+#!/usr/bin/sh
+
+connected="說"
+disconnected="ﲁ"
+
+if ip link | grep 'state UP' >/dev/null; then
+    if ping -c1 google.com >/dev/null;then
+        echo "$connected Online"; sleep 25
+    else
+        echo "$disconnected Offline"; sleep 5
+    fi
+else
+    echo "$disconnected Offline"; sleep 5
+fi

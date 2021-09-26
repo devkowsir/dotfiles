@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pidof transmission-daemon > /dev/null || transmission-daemon
+
+transmission-remote --add "$@" && notify-send "Transmission Daemon" "Torrent Added"

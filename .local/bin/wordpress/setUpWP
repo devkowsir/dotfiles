@@ -1,0 +1,23 @@
+#!/bin/sh
+
+[ ! "$(whoami)" = "root" ] && echo "run with superuser privileges." && exit 0
+apache_file=/etc/httpd/conf/httpd.conf
+
+pacman -S --needed apache mariadb php php-apache php-cgi php-gd php-imagick
+
+# Apache web server configuration
+sed -i "/mpm_event_module/s/^L/#L/;\
+	/mpm_prefork_module\|unique_id_module\|rewrite_module/s/^#//;\
+	/srv\/http/,/\/D/{s/\/srv/\/data/g;/AllowOverride None/s/None/All/}" $apache_file
+
+grep "LoadModule php_module modules/libphp.so" $apache_file > /dev/null || echo "LoadModule php_module modules/libphp.so" >> $apache_file
+grep "AddHandler php-script .php" $apache_file > /dev/null || echo "AddHandler php-script .php" >> $apache_file
+grep "Include conf/extra/php_module.conf" $apache_file > /dev/null || echo "Include conf/extra/php_module.conf" >> $apache_file
+
+# PHP configuration
+sed -i "/^;e.*n=/{/bz2\|gd\|mysql/s/^;//}" /etc/php/php.ini
+sed -i "s/^;//" /etc/php/conf.d/imagick.ini
+
+# MySQL configuration
+sed -i "/^\[mysqld/,/\[/{/datadir/d;/mysqld/s/$/\ndatadir=\/data\/mysql/}" /etc/my.cnf.d/server.cnf
+chown mysql:mysql /data/mysql -R

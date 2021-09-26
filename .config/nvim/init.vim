@@ -48,17 +48,6 @@ vnoremap <Leader>as I0.<Space><Esc>gvg<C-a>
 " Uppercase a word in insert mode
 inoremap <c-u> <Esc>gUiwea
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""AUTOCOMMANDS"""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" html class adding
-" autocmd FileType html nnoremap  <leader>c viw<esc>a<space>class=""<esc>i
-" autocmd FileType html inoremap  <leader>c <esc>viw<esc>a<space>class=""<esc>i
-" autocmd FileType html nnoremap  <leader>a t>la
-" autocmd FileType html inoremap  <leader>a <esc>t>la
-" Need this line for moving between last used tabs
-autocmd TabLeave * let g:lasttab = tabpagenr()
-autocmd BufNewFile,BufRead *.rasi set ft=css
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""GENERAL OPTIONS""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indention Options
@@ -92,7 +81,6 @@ set number relativenumber  " Show line number on the current line and relative n
 set noerrorbells    " Disable beep on errors.
 set visualbell      " Flash the screen instead of beeping on errors.
 set mouse=a          " Enable mouse for scrolling and resizing.
-colorscheme industry     " ColorScheme 
 " Code Folding Options
 set foldmethod=indent  " Fold based on indention levels.
 set foldnestmax=3     " Only fold up to three nested levels.
@@ -129,8 +117,17 @@ set shortmess+=c          " Don't pass messages to |ins-completion-menu|.
 filetype plugin on
 hi Normal guibg=NONE ctermbg=NONE    " Enabling transparency
 set path=.,**
-set path=.,**
-colorscheme elflord
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""AUTOCOMMANDS"""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" html class adding
+" autocmd FileType html nnoremap  <leader>c viw<esc>a<space>class=""<esc>i
+" autocmd FileType html inoremap  <leader>c <esc>viw<esc>a<space>class=""<esc>i
+" autocmd FileType html nnoremap  <leader>a t>la
+" autocmd FileType html inoremap  <leader>a <esc>t>la
+" Need this line for moving between last used tabs
+autocmd TabLeave * let g:lasttab = tabpagenr()
+autocmd BufNewFile,BufRead *.rasi set ft=css
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""PLUG CONFIGUARATION""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

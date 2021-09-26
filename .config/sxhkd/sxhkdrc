@@ -4,39 +4,39 @@
 # Window manager independent hotkeys
 ####################################
 
-# TMUX , Terminal.
-super + {_, shift + }Return
-	{$TERMINAL -e tmux new-session -A -s 'Default', $TERMINAL}
+# Terminal.
+super + Return
+     $TERMINAL
 
 # Deskop Programs Launcher
-super + d
-	rofi -show drun -modi drun -no-lazy-grab -theme launchpad
+super + shift + Return
+    rofi -show drun -modi drun -no-lazy-grab -theme launchpad
 
 # Run any binary
 super + r
-    rofi -show run -modi run -theme Arc-Dark
+     rofi -show run -modi run -theme Arc-Dark
 
 # Launch frequently used gui programs
 super + g ; {w,f,e}
-    {brave,thunar,codium}
+     {brave,thunar,codium}
 
 # Launch frequently used cli programs
 super + c ; {n,c,h,s,p,l,e}
-    $TERMINAL -e {nmtui,calcurse,htop,ncdu,ncpamixer,lf,neomutt}
+     $TERMINAL -e {nmtui,calcurse,htop,ncdu,ncpamixer,lf,neomutt}
 
 # Launcher for bin directory scripts
 super + shift + r
-	`find $HOME/.local/bin -type f | sed "s/^.*\///" |\
-        rofi -no-config -dmenu -theme Arc-Dark`
+    `find $HOME/.local/bin -type f | sed "s/^.*\///" |\
+         rofi -no-config -dmenu -theme Arc-Dark`
 
 # run with root
 super + alt + r
-	program=`dmenu_path | rofi -no-config -dmenu -theme Arc-Dark`;\
-        [ ! -z "$program" ] && sudo -A "$program"
+    program=`dmenu_path | rofi -no-config -dmenu -theme Arc-Dark`;\
+         [ ! -z "$program" ] && sudo -A "$program"
 
 # make sxhkd reload its configuration files:
 # super + shift + s
-# 	pkill -USR1 -x sxhkd;\
+#     pkill -USR1 -x sxhkd;\
 #     notify-send "sxhkd restarted"
 
 # close or kill window
@@ -45,23 +45,23 @@ super + alt + r
 
 # move floating window
 super + {Left,Down,Up,Right}
-    xdo move {-x -20,-y +20,-y -20,-x +20}
+     xdo move {-x -20,-y +20,-y -20,-x +20}
 
 # Screenshot
 {_, super + , control + } Print
-    screenshot --{focused,full,selective}
+     screenshot --{focused,full,selective}
 
 # Change wallpaper
 super + ctrl + w
-    RAND=$(find $HOME/Pictures/wallpapers -xtype f | sort -R | head -1);\
-        xwallpaper --zoom "$RAND" && cp -f $RAND $HOME/.config/wall.png
+     RAND=$(find $HOME/Pictures/wallpapers -xtype f | sort -R | head -1);\
+         xwallpaper --zoom "$RAND" && cp -f $RAND $HOME/.config/wall.png
 
 # misc
 super + shift + {e,c}
-    {\
-        rofiEmoji | rofi -dmenu -no-config -theme Arc-Dark,\
-        colorpicker --short --one-shot --preview | xclip -selection clipboard -r\
-    }
+     {\
+         rofiEmoji | rofi -dmenu -no-config -theme Arc-Dark,\
+         colorpicker --short --one-shot --preview | xclip -selection clipboard -r\
+     }
 
 #########################
 # bspwm dependent hotkeys
@@ -69,55 +69,55 @@ super + shift + {e,c}
 
 # Quit bspwm
 super + escape
-    bspc quit
+     bspc quit
 
 # close or kill window
 super + {_,shift + }q
-    bspc node -{c,k}
+     bspc node -{c,k}
 
 # Restart bspwm, sxhkd, polybar
 super + ctrl + r ; {b,h,p}
-    {\
-        bspc wm -r && notify-send  "Reload" "Reloaded bspwm",\
-        pkill -USR1 -x sxhkd && notify-send  "Reload" "Reloaded sxhkd",\
-        polybar-msg cmd restart && notify-send  "Reload" "Reloaded polybar"\
-    }
+     {\
+         bspc wm -r && notify-send  "Reload" "Reloaded bspwm",\
+         pkill -USR1 -x sxhkd && notify-send  "Reload" "Reloaded sxhkd",\
+         polybar-msg cmd restart && notify-send  "Reload" "Reloaded polybar"\
+     }
 
 # focus to desktop or send window to desktop
 super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} '^{1-9,10}'
+     bspc {desktop -f,node -d} '^{1-9,10}'
 
 # send and focus window to desktop
 super + ctrl + {1-9,0}
-    bspc node -d '^{1-9,10}' --follow
+     bspc node -d '^{1-9,10}' --follow
 
 # Toggle fullscreen
 super + f
-    bspc node -t fullscreen || bspc node -t tiled
+     bspc node -t fullscreen || bspc node -t tiled
 
 # Toggle floating
 super + ctrl + space
-    bspc node -t floating || bspc node -t tiled
+     bspc node -t floating || bspc node -t tiled
 
 # set the node flags
 super + ctrl + {m,l,s,p}
-	bspc node --flag {marked,locked,sticky,private}
+    bspc node --flag {marked,locked,sticky,private}
 
 # alternate between the tiled and monocle layout
 super + {_,shift + } space
-	bspc desktop --layout {next,prev}
+    bspc desktop --layout {next,prev}
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+    bspc node -{f,s} {west,south,north,east}
 
 # preselect direction
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+    bspc node -p {west,south,north,east}
 
 # cancel the preselection for the focused desktop
 super + ctrl + c
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 # move focused window to presected area
 super + n
@@ -125,31 +125,31 @@ super + n
 
 # Expand/contract a window by moving one of its side outward/inward
 super + alt + {h,j,k,l}
-    STEP=20; SELECTION={1,2,3,4}; \
-    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
-    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+     STEP=20; SELECTION={1,2,3,4}; \
+     bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+     bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
 # Rotate tree
 super + shift + {bracketright,bracketleft}
-    bspc node @/ -C {forward,backward}
+     bspc node @/ -C {forward,backward}
 
 # Toggle between top and normal layer
 super + ctrl + t
-	bspc node -l above || bspc node -l normal
+    bspc node -l above || bspc node -l normal
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+    bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
 super + {n,p}
-	bspc node -f {next,prev}.local.!hidden.window
+    bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+    bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
 super + {grave,Tab}
-	bspc {node,desktop} -f last
+    bspc {node,desktop} -f last
 

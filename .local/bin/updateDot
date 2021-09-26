@@ -7,7 +7,7 @@ seperator="#####################################################################
 files=$(find -type f | grep -v .git | sed 's/\.\///')
 
 for i in $files;do
-    if ! diff --color=auto "$HOME"/"$i" "$i";then
+    if ! diff --color=auto "$i" "$HOME"/"$i";then
         echo $seperator;
         echo "Enter commit message for $i: "
         read msg

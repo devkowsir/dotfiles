@@ -24,19 +24,20 @@ bspc config gapless_monocle           true
 
 bspc rule -r "*"
 
-bspc rule -a VSCodium desktop='^3'
-bspc rule -a firefox follow=off desktop='^2'
-bspc rule -a Brave-browser follow=off desktop='^2'
-bspc rule -a Chromium follow=off desktop='^2'
-bspc rule -a "VirtualBox Manager follow=off" desktop='^4'
-bspc rule -a "mpv" follow=off desktop='^4'
-bspc rule -a "VirtualBox Machine" follow=off desktop='^5'
-bspc rule -a VirtualBoxVM follow=off desktop='^5'
+bspc rule -a VSCodium desktop='^1'
+bspc rule -a firefox desktop='^2'
+bspc rule -a Brave-browser desktop='^2'
+bspc rule -a Chromium desktop='^2'
+bspc rule -a Thunar desktop='^3'
+bspc rule -a "VirtualBox Manager" desktop='^4'
+bspc rule -a "mpv" state=fullscreen
+bspc rule -a "VirtualBox Machine" desktop='^5'
+bspc rule -a VirtualBoxVM desktop='^5'
 
 ## need to be floating
 floating="Galculator Sxiv Gparted Preferences dialog menu pop-up task_dialog" 
 
 for i in $floating; do
-        bspc rule -a $i state=floating follow=on
+        bspc rule -a $i state=floating 
 done
 $HOME/.config/polybar/launch.sh &

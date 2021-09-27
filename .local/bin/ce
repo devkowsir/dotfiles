@@ -1,7 +1,6 @@
 #!/bin/sh
 
-files=".zprofile
-.config/alacritty/alacritty.yml
+files=".config/alacritty/alacritty.yml
 .config/awesome/rc.lua
 .config/bspwm/bspwmrc
 .config/dmenu/config.h
@@ -13,10 +12,12 @@ files=".zprofile
 .config/polybar/config.ini
 .config/qtile/config.py
 .config/sxhkd/sxhkdrc
+.config/tmux/tmux.conf
 .config/x11/Xinitrc
 .config/x11/Xresources
 .config/zsh/.zshrc
-.config/zsh/aliasrc"
+.config/zsh/aliasrc
+.zprofile"
 
 file=$(printf "$files" | fzf)
 [ ! -z $file ] && nvim $HOME/$file

@@ -5,11 +5,11 @@
 ####################################
 
 # Terminal.
-super + Return
-     $TERMINAL
+super +{_, shift +} Return
+    {$TERMINAL -e tmux new-session -A -s Default, $TERMINAL}
 
 # Deskop Programs Launcher
-super + shift + Return
+super + d
     rofi -show drun -modi drun -no-lazy-grab -theme launchpad
 
 # Run any binary

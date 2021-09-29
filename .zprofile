@@ -57,3 +57,4 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx $XDG_CONFIG_HOME/x11/Xinitrc > $XDG_CACHE_HOME/xinit.log 2>&1
 fi
+env | grep "DISPLAY" > /dev/shm/Env

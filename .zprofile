@@ -15,14 +15,12 @@ export ZDOTDIR="$HOME/.config/zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
-export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="$XDG_CONFIG_HOME/less/history"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
-export NPM_CONFIG_USERCONFIG="{$XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
 export ANDROID_AVD_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
 export DICS="/usr/share/stardict/dic/"
 export PYTHONHISTFILE="$HOME/.cache/python_history"
@@ -57,4 +55,3 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx $XDG_CONFIG_HOME/x11/Xinitrc > $XDG_CACHE_HOME/xinit.log 2>&1
 fi
-env | grep "DISPLAY" > /dev/shm/Env

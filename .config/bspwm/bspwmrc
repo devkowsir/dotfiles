@@ -33,6 +33,7 @@ bspc rule -a "VirtualBox Manager" desktop='^4'
 bspc rule -a "mpv" state=fullscreen
 bspc rule -a "VirtualBox Machine" desktop='^5'
 bspc rule -a VirtualBoxVM desktop='^5'
+bspc rule -a Alacritty:lunarvim locked=true
 
 ## need to be floating
 floating="Galculator Sxiv Gparted Preferences dialog menu pop-up task_dialog" 

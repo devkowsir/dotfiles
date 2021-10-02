@@ -1,14 +1,16 @@
 [Added Associations]
 x-scheme-handler/magnet=torrent.desktop;
 application/x.bittorrent=torrent.desktop;
-image/svg+xml=gimp.desktop;firefox.desktop;
+image/svg+xml=brave-browser.desktop;nvim.desktop;vim.desktop;gimp.desktop;firefox.desktop;
 application/x-php=nvim.desktop;vscodium-bin.desktop;
 inode/directory=nemo.desktop;
 image/jpeg=sxiv.desktop;
-text/plain=nvim.desktop;
+text/plain=lvim.desktop;nvim.desktop;
 application/xml=nvim.desktop;
 video/x-matroska=smplayer.desktop;mpv.desktop;
 image/png=brave-browser.desktop;
+text/x-lua=userapp-st -e lvim %f-RNALA1.desktop;
+application/x-shellscript=userapp-st -n "lunarvim" -e lvim %f-6NIDA1.desktop;
 
 [Default Applications]
 video/x-matroska=mpv.desktop
@@ -24,3 +26,4 @@ x-scheme-handler/ftp=firefox.desktop;
 application/json=VSCodium.desktop
 application/pdf=org.pwmt.zathura.desktop;
 text/plain=nvim.desktop;
+application/x-shellscript=userapp-st -n "lunarvim" -e lvim %f-6NIDA1.desktop

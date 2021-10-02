@@ -14,25 +14,25 @@ super + d
 
 # Run any binary
 super + r
-     rofi -show run -modi run -theme Arc-Dark
+    rofi -show run -modi run -theme Arc-Dark
 
 # Launch frequently used gui programs
-super + g ; {w,f,e}
-     {brave,thunar,codium}
+super + g ; {e,f,w}
+    {st -n lunarvim -e lvim,thunar,brave}
 
 # Launch frequently used cli programs
 super + c ; {n,c,h,s,p,l,e}
-     $TERMINAL -e {nmtui,calcurse,htop,ncdu,ncpamixer,lf,neomutt}
+    $TERMINAL -e {nmtui,calcurse,htop,ncdu,ncpamixer,lf,neomutt}
 
 # Launcher for bin directory scripts
 super + shift + r
     `find $HOME/.local/bin -type f | sed "s/^.*\///" |\
-         rofi -no-config -dmenu -theme Arc-Dark`
+        rofi -no-config -dmenu -theme Arc-Dark`
 
 # run with root
 super + alt + r
     program=`dmenu_path | rofi -no-config -dmenu -theme Arc-Dark`;\
-         [ ! -z "$program" ] && sudo -A "$program"
+        [ ! -z "$program" ] && sudo -A "$program"
 
 # make sxhkd reload its configuration files:
 # super + shift + s
@@ -45,23 +45,23 @@ super + alt + r
 
 # move floating window
 super + {Left,Down,Up,Right}
-     xdo move {-x -20,-y +20,-y -20,-x +20}
+    xdo move {-x -20,-y +20,-y -20,-x +20}
 
 # Screenshot
 {_, super + , control + } Print
-     screenshot --{focused,full,selective}
+    screenshot --{focused,full,selective}
 
 # Change wallpaper
 super + ctrl + w
-     RAND=$(find $HOME/Pictures/wallpapers -xtype f | sort -R | head -1);\
-         xwallpaper --zoom "$RAND" && cp -f $RAND $HOME/.config/wall.png
+    RAND=$(find $HOME/Pictures/wallpapers -xtype f | sort -R | head -1);\
+        xwallpaper --zoom "$RAND" && cp -f $RAND $HOME/.config/wall.png
 
 # misc
 super + shift + {e,c}
-     {\
-         rofiEmoji | rofi -dmenu -no-config -theme Arc-Dark,\
-         colorpicker --short --one-shot --preview | xclip -selection clipboard -r\
-     }
+    {\
+        rofiEmoji | rofi -dmenu -no-config -theme Arc-Dark,\
+        colorpicker --short --one-shot --preview | xclip -selection clipboard -r\
+    }
 
 #########################
 # bspwm dependent hotkeys
@@ -69,35 +69,35 @@ super + shift + {e,c}
 
 # Quit bspwm
 super + escape
-     bspc quit
+    bspc quit
 
 # close or kill window
 super + {_,shift + }q
-     bspc node -{c,k}
+    bspc node -{c,k}
 
 # Restart bspwm, sxhkd, polybar
 super + ctrl + r ; {b,h,p}
-     {\
-         bspc wm -r && notify-send  "Reload" "Reloaded bspwm",\
-         pkill -USR1 -x sxhkd && notify-send  "Reload" "Reloaded sxhkd",\
-         polybar-msg cmd restart && notify-send  "Reload" "Reloaded polybar"\
-     }
+    {\
+        bspc wm -r && notify-send  "Reload" "Reloaded bspwm",\
+        pkill -USR1 -x sxhkd && notify-send  "Reload" "Reloaded sxhkd",\
+        polybar-msg cmd restart && notify-send  "Reload" "Reloaded polybar"\
+    }
 
 # focus to desktop or send window to desktop
 super + {_,shift + }{1-9,0}
-     bspc {desktop -f,node -d} '^{1-9,10}'
+    bspc {desktop -f,node -d} '^{1-9,10}'
 
 # send and focus window to desktop
 super + ctrl + {1-9,0}
-     bspc node -d '^{1-9,10}' --follow
+    bspc node -d '^{1-9,10}' --follow
 
 # Toggle fullscreen
 super + f
-     bspc node -t fullscreen || bspc node -t tiled
+    bspc node -t fullscreen || bspc node -t tiled
 
 # Toggle floating
 super + ctrl + space
-     bspc node -t floating || bspc node -t tiled
+    bspc node -t floating || bspc node -t tiled
 
 # set the node flags
 super + ctrl + {m,l,s,p}
@@ -125,13 +125,13 @@ super + n
 
 # Expand/contract a window by moving one of its side outward/inward
 super + alt + {h,j,k,l}
-     STEP=20; SELECTION={1,2,3,4}; \
-     bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
-     bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
 # Rotate tree
 super + shift + {bracketright,bracketleft}
-     bspc node @/ -C {forward,backward}
+    bspc node @/ -C {forward,backward}
 
 # Toggle between top and normal layer
 super + ctrl + t

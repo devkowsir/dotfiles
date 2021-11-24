@@ -5,7 +5,6 @@ include "/home/kawsar/.gtkrc-2.0.mine"
 gtk-theme-name="Arc-Dark"
 gtk-icon-theme-name="Papirus-Dark"
 gtk-font-name="Sans 10"
-gtk-cursor-theme-name=""
 gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
 gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR

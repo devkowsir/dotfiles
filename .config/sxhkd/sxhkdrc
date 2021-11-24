@@ -17,11 +17,11 @@ super + r
     rofi -show run -modi run -theme Arc-Dark
 
 # Launch frequently used gui programs
-super + g ; {e,f,w}
+super + g ; super + {e,f,w}
     {st -n lunarvim -e lvim,thunar,brave}
 
 # Launch frequently used cli programs
-super + c ; {n,c,h,s,p,l,e}
+super + c ; super + {n,c,h,s,p,l,e}
     $TERMINAL -e {nmtui,calcurse,htop,ncdu,ncpamixer,lf,neomutt}
 
 # Launcher for bin directory scripts
@@ -76,7 +76,7 @@ super + {_,shift + }q
     bspc node -{c,k}
 
 # Restart bspwm, sxhkd, polybar
-super + ctrl + r ; {b,h,p}
+super + ctrl + r ; super + {b,h,p}
     {\
         bspc wm -r && notify-send  "Reload" "Reloaded bspwm",\
         pkill -USR1 -x sxhkd && notify-send  "Reload" "Reloaded sxhkd",\

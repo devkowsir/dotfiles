@@ -1,0 +1,33 @@
+#!/bin/sh
+
+[ ! -f "$1" ] && echo "filename is needed as first argument"
+
+clear
+IFS=
+alacritty=`(cat $1)`
+
+xresources=`echo $alacritty | grep "\s\{3,4\}\(background\|foreground\|cursor\)"`
+xresources+="\n"
+xresources+=`echo $alacritty | grep -A8 "normal:" | grep -v "normal:" | awk '{print NR-1, $2}'`
+xresources+="\n"
+xresources+=`echo $alacritty | grep -A8 "bright:" | grep -v "bright:" | awk '{print NR+7, $2}'`
+
+xresources=`echo -e $xresources | sed "\
+  /ground/{s/^\s*/*./;s/:\s*/:  /};\
+  s/\s*cursor/*.cursorColor/;\
+  /^[0-9] '/s/ '/  '/;\
+  /^[0-9]/{s/^/*.color/;s/ /:     /};\
+  s/'\|\"//g;\
+  "`
+
+formatted=`echo "! special";echo -e $xresources | grep "ground\|Color"`
+formatted+=`echo -e "\n\n! black";echo -e $xresources | grep "color\(0\|8\):"`
+formatted+=`echo -e "\n\n! red";echo -e $xresources | grep "color\(1\|9\):"`
+formatted+=`echo -e "\n\n! green";echo -e $xresources | grep "color\(2\|10\):"`
+formatted+=`echo -e "\n\n! yellow";echo -e $xresources | grep "color\(3\|11\):"`
+formatted+=`echo -e "\n\n! blue";echo -e $xresources | grep "color\(4\|12\):"`
+formatted+=`echo -e "\n\n! magenta";echo -e $xresources | grep "color\(5\|13\):"`
+formatted+=`echo -e "\n\n! cyan";echo -e $xresources | grep "color\(6\|14\):"`
+formatted+=`echo -e "\n\n! white";echo -e $xresources | grep "color\(7\|15\):"`
+
+echo -e $formatted

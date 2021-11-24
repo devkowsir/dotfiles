@@ -1,0 +1,57 @@
+#!/bin/sh
+
+IFS=
+tabs 4
+
+help() {
+    message="Options:
+        -p          Get html from primary clipboard.
+        -c          Get html from main clipboard.
+        -s          Get html from standard input.
+        -i File     Get html by reading File."
+    echo $message
+    exit 1
+}
+
+while getopts :pcsi: options 2>/dev/null;do
+    case $options in
+        p) html=$(xclip -o -selection primary;break);;
+        c) html=$(xclip -o -selection clipboard;break);;
+        s) html=$(cat -;break);;
+        i) html=$(cat $OPTARG;break);;
+        ?) help;;
+    esac
+done
+
+[ -z "$html" ] && help
+
+##explaining what each line of sed commands do.
+# Delete blank line containing only spaces or tabs.
+# Search each 2 spaces and replace with tabs.
+# Delete commented lines.
+# If nested tag found in a single line create a new line with proper indentation.
+# Same as step 3. Needed for 3rd nested tag.
+# Delete all other part of the line except the tabs and starting tag.
+# Delete the lines that contains only tabs and closing tags.
+# ID selector.
+# Class selector.
+# tag selector.
+sass=$(echo -e "$html" | sed -E "
+    /^[\t[:space:]]*$/d
+    s|( {2})|\t|g
+    /<\!--.*-->/d
+    s|^(\t*)(<[^/>]*>)[^(</)]*(<[^>/][^>]*>)|\1\2</\n\1\t\3</|
+    s|^(\t*)(<[^>]*>)[^<]*(<[^/>][^>]*>)|\1\2</\n\1\t\3</|
+    s|^(\t*<[^>]+>).*|\1|
+    /^\t*<\/.*/d
+    /^\t$/d
+    / id=/s/^(\t*).*id=\"([^\"]*)\".*/\1#\2/
+    / class=/{s/^(\t*).*class=\"([^\"]*)\".*/\1.\2/;s/ /./g}
+    s|^(\t*)<([a-z0-9]*).*|\1\2|
+    " | uniq)
+
+# count the tabs in the first line.
+tabs=$(echo "$sass" | head -n1 | grep -o "`printf '\t'`" | wc -l)
+# delete starting tabs in all lines based on previous tab count.
+([ $tabs = 0 ] && echo "$sass" || echo "$sass" | sed -E "s|^[\t]{$tabs}||") |\
+    sass-convert -F sass -T scss | sed "1i // nonsense in vim"

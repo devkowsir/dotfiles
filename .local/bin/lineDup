@@ -1,0 +1,12 @@
+#!/bin/sh
+
+IFS=
+line="$1"
+contents="$@"
+output=""
+
+for content in "${@:2:10}";do
+    [ -z $output ] || output+="\n"
+    output+=`echo $line | sed -E "s|[-]{2}|\$content|g"`
+done
+echo -e $output

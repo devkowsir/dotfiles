@@ -6,3 +6,5 @@ case "$1" in
   "--selective")  scrot 'screenshot_%Y%m%d-%H%M%S_$wx$h.png' -e 'mv $f ~/Pictures/screenshot' -z -a $(slop -f '%x,%y,%w,%h');;
   *)              exit;;
 esac
+
+notify-send "Screenshot taken in ~/Pictures/screenshot."

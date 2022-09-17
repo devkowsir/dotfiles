@@ -3,8 +3,8 @@ export PATH=$PATH$(find ~/.local/bin -type d -printf ":%p")
 
 # Default programs:
 export EDITOR="nvim"
-export TERMINAL="st"
-export BROWSER="brave"
+export TERMINAL="alacritty"
+export BROWSER="chromium"
 
 # export language variables
 export LANG=en_US.UTF-8

@@ -37,7 +37,7 @@ local function note_image()
   local B_path = get_path_info()
   local img_file = "imgshot_"..os.date('%Y-%m-%d_%H:%M:%S')..".jpg"
   mp.commandv('screenshot-to-file', B_path.."/images/"..img_file, 'video')
-  local command = 'echo "\\n\\![image shot](./images/'..img_file..')" >> "'..B_path..'/main.md"'
+  local command = 'echo "\\n![image shot](./images/'..img_file..')" >> "'..B_path..'/main.md"'
   mp.commandv('run', '/usr/bin/dash', '-c', command)
 end
 

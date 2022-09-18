@@ -6,12 +6,12 @@
 # Directory 1 structure:
 ####################################################
 # .
-# ├── 01 - Getting Started
+# ├── 01 - Getting Started/
 # │   ├── 001 Welcome To The Course_.mp4
 # │   ├── 001 Welcome To The Course_.srt
 # │   ├── 002 What is React.js_.mp4
 # │   ├── 002 What is React.js_.srt
-# ├── 02 - JavaScript Refresher
+# ├── 02 - JavaScript Refresher/
 # │   ├── 001 Module Introduction.mp4
 # │   ├── 001 Module Introduction.srt
 # │   ├── 002 Understanding _let_ and _const_.mp4
@@ -20,22 +20,15 @@
 # Directory 2 structure:
 ####################################################
 # .
-# ├── 01 - Getting Started
-# │   ├── 001 Welcome To The Course_
-# │   │   ├── images
-# │   │   └── main.md
-# │   ├── 002 What is React.js_
-# │   │   ├── images
-# │   │   └── main.md
+# ├── 01 - Getting Started/
+# │   ├── images/
+# │   ├── 001 Welcome To The Course_.md
+# │   ├── 002 What is React.js_.md
 # │   └── index.md
-# ├── 02 - JavaScript Refresher
-# │   ├── 001 Module Introduction
-# │   │   ├── images
-# │   │   └── main.md
-# │   ├── 002 Understanding _let_ and _const_
-# │   │   ├── images
-# │   │   └── main.md
-# │   │   └── main.md
+# ├── 02 - JavaScript Refresher/
+# │   ├── images/
+# │   ├── 001 Module Introduction.md
+# │   ├── 002 Understanding _let_ and _const_.md
 # │   └── index.md
 # └── index.md
 ####################################################
@@ -43,23 +36,17 @@ dir1="${1}"
 dir2="${2%/}"
 cd "$dir2"
 
-find "$dir1" -type f | \
-  grep "mp4$" | \
-  sed "s|${dir1/\[/\\\[}||;s|.mp4||;s| |\\\ |g;s|'|\\\'|;s|^|.|;s|$|/images|" | \
-  xargs -I {} mkdir -v -p {}
-
-find -mindepth 1 -maxdepth 1 -type d | \
-  sed "s|^|[[|;s|$|/index.md]]|" | sort -h | nl -n rz -w 2 -s ". " > index.md
-
-find -mindepth 1 -maxdepth 1 -type d | while read line1; do
-  cd "$line1"
-  find -mindepth 1 -maxdepth 1 -type d | \
-    sed "s|^|[[|;s|$|/main.md]]|" | sort -h | nl -n rz -w 2 -s ". " > index.md
-  find -mindepth 1 -maxdepth 1 -type d | while read line2; do
-    cd "$line2"
-    touch main.md
+find "$dir1" -mindepth 1 -maxdepth 1 -type d | \
+  sed "s|${dir1/\[/\\\[}||;s|.mp4||;s| |\\\ |g;s|'|\\\'|;s|^|.|" | sort -h | \
+  while read chapter; do
+    mkdir -p "$chapter/images"
+    cd "$chapter"
+    find "$dir1/$chapter" -type f | grep ".mp4$" | \
+      sed "s|^.*/||;s|.mp4$||;s|'|\\\'|;s| |\\\ |g" | sort -h | \
+      while read topic; do
+        echo "# $topic" > "$topic.md"
+        echo "* [[$topic]]" >> index.md
+      done
     cd ..
+    echo "* [[${chapter#./}]]" >> index.md
   done
-  cd ../
-done
-

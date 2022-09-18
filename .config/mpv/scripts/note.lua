@@ -11,33 +11,34 @@ local function get_path_info()
   -- topic name
   local t_name = mp.get_property("filename/no-ext")
   -- base path of note folder
-  local b_path = r_path..c_name.."/"..t_name
+  local b_path = r_path..c_name.."/"
 
-  return b_path
+  return b_path, t_name
 end
 
 local function note_subtitle()
-  local B_path = get_path_info()
+  local b_path, t_name = get_path_info()
   local subtitle = mp.get_property("sub-text"):gsub("\"", "\\%0")
   mp.commandv(
     "run", "/usr/bin/dash", "-c",
-    "printf \""..subtitle.."\" >> '"..B_path.."/main.md'"
+    "printf \""..subtitle.."\" >> '"..b_path..t_name..".md'"
   )
 end
 
 local function note_code()
-  local B_path = get_path_info()
+  local b_path, t_name = get_path_info()
 
   mp.commandv(
     "run", "/usr/bin/dash", "-c",
-    "note-code.sh '"..B_path.."'"
+    "note-code.sh '"..b_path.."' '"..t_name.."'"
   )
 end
 local function note_image()
-  local B_path = get_path_info()
-  local img_file = "imgshot_"..os.date('%Y-%m-%d_%H:%M:%S')..".jpg"
-  mp.commandv('screenshot-to-file', B_path.."/images/"..img_file, 'video')
-  local command = 'echo "\\n![image shot](./images/'..img_file..')" >> "'..B_path..'/main.md"'
+  local b_path, t_name = get_path_info()
+  local t_index = string.sub(t_name, 0, 2)
+  local img_file = t_index.."_imgshot_"..os.date('%Y-%m-%d_%H:%M:%S')..".jpg"
+  mp.commandv('screenshot-to-file', b_path.."images/"..img_file, 'video')
+  local command = 'echo "\\n![image shot](./images/'..img_file..')" >> "'..b_path..t_name..'.md"'
   mp.commandv('run', '/usr/bin/dash', '-c', command)
 end
 

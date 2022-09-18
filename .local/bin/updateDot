@@ -21,6 +21,7 @@ for i in $files;do
 done
 
 if [ $n -eq 1 ];then
+    echo "Pushing to github..."
     git push
 else
     echo "You are already up to date"

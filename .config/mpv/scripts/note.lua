@@ -3,7 +3,7 @@ local utils = require("mp.utils")
 
 local function get_path_info()
   -- react path
-  local r_path = "/home/kawsar/Documents/Obsidian Vault/Programming/JAVASCRIPT/ReactJS/"
+  local r_path = "/home/kawsar/Documents/obsidian/Programming/JAVASCRIPT/ReactJS/"
   -- absolute path of video
   local a_path = utils.join_path(utils.getcwd(), mp.get_property("stream-path"))
   -- chapter name
@@ -23,6 +23,7 @@ local function note_subtitle()
     "run", "/usr/bin/dash", "-c",
     "printf \""..subtitle.."\" >> '"..b_path..t_name..".md'"
   )
+  mp.osd_message("subtitle copied in note.", 0.2)
 end
 
 local function note_code()
@@ -32,14 +33,16 @@ local function note_code()
     "run", "/usr/bin/dash", "-c",
     "note-code.sh '"..b_path.."' '"..t_name.."'"
   )
+  mp.osd_message("image and code added in note.", 0.2)
 end
 local function note_image()
   local b_path, t_name = get_path_info()
-  local t_index = string.sub(t_name, 0, 2)
+  local t_index = string.sub(t_name, 0, 3)
   local img_file = t_index.."_imgshot_"..os.date('%Y-%m-%d_%H:%M:%S')..".jpg"
   mp.commandv('screenshot-to-file', b_path.."images/"..img_file, 'video')
   local command = 'echo "\\n![image shot](./images/'..img_file..')" >> "'..b_path..t_name..'.md"'
   mp.commandv('run', '/usr/bin/dash', '-c', command)
+  mp.osd_message("image added in note.", 0.2)
 end
 
 mp.add_key_binding("Shift+n", "note-subtitle", note_subtitle)

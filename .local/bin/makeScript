@@ -1,5 +1,5 @@
 #!/bin/sh
 
-[ -z $2 ] && runner='sh' || runner=$2
+runner=${2:-sh}
 echo "#!/bin/$runner" > $1
 chmod +x $1

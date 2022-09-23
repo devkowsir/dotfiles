@@ -9,4 +9,4 @@ scrot "$img" -z -a $(slop -f '%x,%y,%w,%h')
 code="$(tesseract --psm 6 $img -)"
 mv "$img" "$b_path/images/"
 echo "\n![code shot](./images/$img)" >> "$b_path/$t_name.md"
-echo "$code\n" >> "$b_path/$t_name.md"
+echo "\`\`\`JS\n$code\n\`\`\`" >> "$b_path/$t_name.md"

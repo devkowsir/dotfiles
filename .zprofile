@@ -1,6 +1,7 @@
 # Adds `~/.local/bin` to $PATH
 export PATH=$PATH$(find ~/.local/bin -type d -printf ":%p")
 export PATH=$PATH:$HOME/.local/share/python/bin
+export PATH=$PATH:$HOME/.local/lib/npm
 
 # Default programs:
 export EDITOR="nvim"
@@ -17,6 +18,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NPM_CONFIG_PREFIX="$HOME/.local/lib/npm"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="$XDG_CONFIG_HOME/less/history"

@@ -1,7 +1,7 @@
 # Adds `~/.local/bin` to $PATH
 export PATH=$PATH$(find ~/.local/bin -type d -printf ":%p")
 export PATH=$PATH:$HOME/.local/share/python/bin
-export PATH=$PATH:$HOME/.local/lib/npm
+export PATH=$PATH:$HOME/.local/lib/npm/bin
 
 # Default programs:
 export EDITOR="nvim"

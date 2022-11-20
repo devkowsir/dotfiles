@@ -10,7 +10,7 @@ super +{_, shift +} Return
 
 # Deskop Programs Launcher
 super + d
-    rofi -show drun -modi drun -no-lazy-grab -theme launchpad
+    rofi -show drun -modi drun -no-lazy-grab -theme Arc-Dark
 
 # Run any binary
 super + r

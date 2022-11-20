@@ -24,7 +24,7 @@
   #TERM: alacritty
 
 window:
-  opacity: 0.90
+  opacity: 1
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -889,38 +889,33 @@ draw_bold_text_with_bright_colors: true
   # Print all received window events.
   #print_events: false
 
-
-
+# Colors (Tokyo Night)
+# Source: https://github.com/zatchheems/tokyo-night-alacritty-theme
 colors:
   # Default colors
   primary:
-    background: '#292C3E'
-    foreground: '#EBEBEB'
-
-  # Cursor colors
-  cursor:
-   text: '#292C3E'
-   cursor: '#EBEBEB'
+    background: '#1a1b26'
+    foreground: '#a9b1d6'
 
   # Normal colors
   normal:
-    black:   '#0d0d0d'
-    red:     '#FF301B'
-    green:   '#A0E521'
-    yellow:  '#FFC620'
-    blue:    '#1BA6FA'
-    magenta: '#8763B8'
-    cyan:    '#21DEEF'
-    white:   '#EBEBEB'
+    black:   '#32344a'
+    red:     '#f7768e'
+    green:   '#9ece6a'
+    yellow:  '#e0af68'
+    blue:    '#7aa2f7'
+    magenta: '#ad8ee6'
+    cyan:    '#449dab'
+    white:   '#787c99'
 
   # Bright colors
   bright:
-    black:   '#6D7070'
-    red:     '#FF4352'
-    green:   '#B8E466'
-    yellow:  '#FFD750'
-    blue:    '#1BA6FA'
-    magenta: '#A578EA'
-    cyan:    '#73FBF1'
-    white:   '#FEFEF8'
+    black:   '#7078aa'
+    red:     '#ff7a93'
+    green:   '#b9f27c'
+    yellow:  '#ff9e64'
+    blue:    '#7da6ff'
+    magenta: '#bb9af7'
+    cyan:    '#0db9d7'
+    white:   '#acb0d0'
 

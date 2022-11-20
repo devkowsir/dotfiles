@@ -7,7 +7,9 @@ files=".config/alacritty/alacritty.yml
 .config/dunst/dunstrc
 .config/kitty/kitty.conf
 .config/lf/lfrc
+.config/mpd/mpd.conf
 .config/nvim/init.vim
+.config/ncmpcpp/bindings
 .config/picom/picom.conf
 .config/polybar/config.ini
 .config/qtile/config.py

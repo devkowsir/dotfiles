@@ -1,0 +1,41 @@
+#!/bin/sh
+
+challange=`find -maxdepth 2 -type f | grep "zip$" | sed 's/.zip$//' | fzf --prompt "Choose FrontendMentor Challange-->"`
+#project ownership tier(free/premium): "${challange%/*}"
+#project name: "${challange#./*/}"
+
+create() {
+  unzip -q "$challange.zip"
+  mkdir "$challange"
+  mv "${challange#./*/}" "$challange/guides"
+
+  cd "$challange"
+  tar xpf ../../../react.tar.gz
+  mv guides/images public
+  mv guides/README-template.md README.md
+  rm -r public/vite.svg src/assets
+
+  sed -i "s|vite.svg|images/favicon-32x32.png|;s|Vite + React|${challange#./*/}|" index.html
+  sed -i "/dist/aguides" .gitignore
+}
+
+[ -d "$challange" ] && \
+  echo -e "1. Delete and Create New\n2. Backup and Create New\n3. Exit" |\
+  fzf --prompt "Project already exists. Choose what to do." |
+  while read ans; do
+    case $ans in
+      1*) 
+        rm -rf "$challange"
+        create
+        ;;
+      2*) 
+        mv "$challange" "$challange.bak"
+        create
+        ;;
+      3*) 
+        echo "Exiting"
+        exit 0
+        ;;
+      *) exit 1;;
+    esac
+  done || create

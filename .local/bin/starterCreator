@@ -1,37 +1,50 @@
 #!/bin/sh
 
-challange=`find -maxdepth 2 -type f | grep "zip$" | sed 's/.zip$//' | fzf --prompt "Choose FrontendMentor Challange-->"`
-#project ownership tier(free/premium): "${challange%/*}"
-#project name: "${challange#./*/}"
+# This script is for startin challanges of frontendmentor.io website.
+# Place downloaded zips from challanges in $HOME/myProjects/react/FrontEndMentor/$category
+# where category is newbie/junior/any_dir
+cd "$HOME/myProjects/react/FrontEndMentor"
+zip_path=`find -maxdepth 2 -type f | grep "zip$" | fzf --prompt "Choose FrontendMentor Challange--> "`
+#zip_path: ./frontendmentor_free_newbie_problems/product-preview-card-component-main.zip
+zip_path_no_ext="${zip_path%.zip}"
+#zip_path_no_ext: ./frontendmentor_free_newbie_problems/product-preview-card-component-main
+unzipped_dir="${zip_path_no_ext#./*/}"
+#unzipped_dir: product-preview-card-component-main
+project_path="${zip_path_no_ext%-*}"
+#project_path: ./frontendmentor_free_newbie_problems/product-preview-card-component
+project_name="${project_path#./*/}"
+#project_name: product-preview-card-component
 
 create() {
-  unzip -q "$challange.zip"
-  mkdir "${challange%-*}"
-  mv "${challange#./*/}" "${challange%-*}/guides"
+  unzip -q "$zip_path"
+  mkdir "$project_path"
+  mv "$unzipped_dir" "$project_path/guides"
 
-  cd "${challange%-*}"
+  cd "$project_path"
   tar xpf ../../../react.tar.gz
   mv guides/images public
   mv guides/README-template.md README.md
   rm -r public/vite.svg src/assets
 
-  sed -i "s|vite.svg|images/favicon-32x32.png|;s|Vite + React|${challange#./*/}|" index.html
+  sed -i "s|vite.svg|images/favicon-32x32.png|;s|Vite + React|$project_name|" index.html
   sed -i "/dist/aguides" .gitignore
+  
+  echo "Succesfully completed."
 }
 
-[ "$challange" = "" ] && exit 1
-([ ! -d "$challange-main" ] || [ ! -d "$challange-master" ]) && create && exit 0
+[ "$zip_path" = "" ] && exit 1
+[ ! -d "$project_path" ] && create && exit 0
 
 echo -e "1. Delete and Create New\n2. Backup and Create New\n3. Exit" |\
 fzf --prompt "Project already exists. Choose what to do." |\
   while read ans; do
     case $ans in
       1*) 
-        rm -rf "$challange"
+        rm -rf "$project_path"
         create
         ;;
       2*) 
-        mv "$challange" "$challange.bak"
+        mv "$project_path" "$project_path.bak"
         create
         ;;
       3*) 

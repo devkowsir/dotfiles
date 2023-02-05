@@ -6,10 +6,10 @@ challange=`find -maxdepth 2 -type f | grep "zip$" | sed 's/.zip$//' | fzf --prom
 
 create() {
   unzip -q "$challange.zip"
-  mkdir "$challange"
-  mv "${challange#./*/}" "$challange/guides"
+  mkdir "${challange%-*}"
+  mv "${challange#./*/}" "${challange%-*}/guides"
 
-  cd "$challange"
+  cd "${challange%-*}"
   tar xpf ../../../react.tar.gz
   mv guides/images public
   mv guides/README-template.md README.md
@@ -19,9 +19,11 @@ create() {
   sed -i "/dist/aguides" .gitignore
 }
 
-[ -d "$challange" ] && \
-  echo -e "1. Delete and Create New\n2. Backup and Create New\n3. Exit" |\
-  fzf --prompt "Project already exists. Choose what to do." |
+[ "$challange" = "" ] && exit 1
+([ ! -d "$challange-main" ] || [ ! -d "$challange-master" ]) && create && exit 0
+
+echo -e "1. Delete and Create New\n2. Backup and Create New\n3. Exit" |\
+fzf --prompt "Project already exists. Choose what to do." |\
   while read ans; do
     case $ans in
       1*) 
@@ -38,4 +40,4 @@ create() {
         ;;
       *) exit 1;;
     esac
-  done || create
+  done

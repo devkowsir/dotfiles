@@ -15,6 +15,53 @@ project_path="${zip_path_no_ext%-*}"
 project_name="${project_path#./*/}"
 #project_name: product-preview-card-component
 
+# content of differnt files
+index_css="\
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+#root, #__next {
+  isolation: isolate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+"
+
+app_jsx="\
+import React from 'react'
+
+function App() {
+  return (
+    <div>App</div>
+  )
+}
+
+export default App
+"
+
+app_css=""
+
 create() {
   unzip -q "$zip_path"
   mkdir "$project_path"
@@ -28,6 +75,9 @@ create() {
 
   sed -i "s|vite.svg|images/favicon-32x32.png|;s|Vite + React|$project_name|" index.html
   sed -i "/dist/aguides" .gitignore
+  echo "$index_css" > src/index.css
+  echo "$app_jsx" > src/App.jsx
+  echo "$app_css" > src/App.css
   
   echo "Succesfully completed."
 }

@@ -8,8 +8,8 @@ zip_path=`find -maxdepth 2 -type f | grep "zip$" | fzf --prompt "Choose Frontend
 #zip_path: ./frontendmentor_free_newbie_problems/product-preview-card-component-main.zip
 zip_path_no_ext="${zip_path%.zip}"
 #zip_path_no_ext: ./frontendmentor_free_newbie_problems/product-preview-card-component-main
-unzipped_dir="${zip_path_no_ext#./*/}"
-#unzipped_dir: product-preview-card-component-main
+unzipped_dir="$(zipinfo -1 $zip_path | head -n 1)"
+#unzipped_dir: product-preview-card-component-main/
 project_path="${zip_path_no_ext%-*}"
 #project_path: ./frontendmentor_free_newbie_problems/product-preview-card-component
 project_name="${project_path#./*/}"

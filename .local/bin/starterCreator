@@ -81,6 +81,11 @@ create() {
 
   sed -i "s|vite.svg|images/favicon-32x32.png|;s|Vite + React|$project_name|" index.html
   sed -i "/dist/aguides" .gitignore
+  sed -i "\
+    s/screenshot.jpg/screenshot.png/;\
+    /solution-url.com)/s|^.*$|- [Solution](https://github.com/kawsarahmed-012/$project_name)|;\
+    /live-site-url.com)/s|^.*$|- [Live](https://$project_name-kawsar.netlify.app)|;\
+    " README.md
   echo "$index_css" > src/index.css
   echo "$app_jsx" > src/App.jsx
   echo "$app_css" > src/App.css

@@ -93,5 +93,5 @@ alias \
   fix-keyboard="setxkbmap -option 'caps:swapescape';xset r rate 300 50" \
   syncRemote="rclone sync --create-empty-src-dirs $HOME/Documents/obsidian/ obsidian:/"\
   syncLocal="rclone sync --create-empty-src-dirs obsidian:/ $HOME/Documents/obsidian/"\
-  extractColors="grep 'hsl([^(]*)$' guides/style-guide.md | tr '[:upper:] ' '[:lower:]-' | sed 's/\(,\|:\)-/\1 /g'"
+  extractColors="grep 'hsl([^(]*)$' guides/style-guide.md | tr '[:upper:] ' '[:lower:]-' | sed 's/\(,\|:\)-/\1 /g;s/$/;/'"
 

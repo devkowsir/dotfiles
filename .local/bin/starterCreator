@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This script is for startin challanges of frontendmentor.io website.
+# This script is for starting challanges of frontendmentor.io website.
 # Place downloaded zips from challanges in $HOME/myProjects/react/FrontEndMentor/$category
 # where category is newbie/junior/any_dir
 cd "$HOME/myProjects/react/FrontEndMentor"

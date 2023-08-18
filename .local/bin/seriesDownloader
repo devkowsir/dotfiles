@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# Pass the link of ftp page which contain all the video download links. e.g. seriesDownloader "your link in this quotation"
-
-links=$(curl "$1" | grep "VID" | grep -o "href=\"[^\"]*\"" | cut -d \" -f2 )
-
-for i in $links;do
-	wget "$1/$i"
+# Pass a link which contains links to the actual video or audio files to be downloaded.
+host=`echo $1 | sed "s|^.*//||;s|/.*$||"`
+links=`curl "$1" | sed "s/\"/'/g" | grep -o "href='[^']*'" | cut -d \' -f2`
+for file in $links;do
+    wget --spider "$host$file" 2>&1 | grep -B 3 "application/octet-stream" | grep -o "http.*$" | xargs -I {} wget {}
 done

@@ -7,6 +7,7 @@ endif
 call plug#begin('/home/kawsar/.local/share/nvim/autoload/plugged')
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'tpope/vim-commentary'
+  Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""GENERAL KEYBINDINGS"""""""""""""""""""""""""""""""""
@@ -81,6 +82,7 @@ set number relativenumber  " Show line number on the current line and relative n
 set noerrorbells    " Disable beep on errors.
 set visualbell      " Flash the screen instead of beeping on errors.
 set mouse=a          " Enable mouse for scrolling and resizing.
+colorscheme habamax
 " Code Folding Options
 set foldmethod=indent  " Fold based on indention levels.
 set foldnestmax=3     " Only fold up to three nested levels.

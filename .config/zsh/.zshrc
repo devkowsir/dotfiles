@@ -66,10 +66,10 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 echo $TTY | grep pts > /dev/null && eval "$( starship init zsh )"
 
 # Load autosuggestions plugin
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2> /dev/null || source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load syntax highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2> /dev/null || source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Launch Neofetch
 neofetch

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd ~/Pictures
+file=$(find -type f | fzf)
+sxiv $file

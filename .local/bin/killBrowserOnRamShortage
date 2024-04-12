@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while true; do
+    if [ `free --mega | sed -n "/Mem:/s/.* \([0-9]\+\)$/\1/p"` -lt 500 ]; then
+        killall firefox
+        killall chromium
+        killall chrome
+    fi
+    sleep 1
+done

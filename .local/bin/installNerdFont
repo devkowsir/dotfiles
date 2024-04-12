@@ -1,0 +1,19 @@
+#/bin/bash
+
+error=""
+
+help() {
+    echo "$error\nUsage: installNerdFont DroidSansMono"
+}
+
+[ -z "$1" ] && error="Font name is not specified" && help && exit 1
+
+echo "[-] Downloading fonts [-]"
+wget -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$1.zip"
+[ !  "$?" = 0 ] && echo "Something went wrong when downloading the font" && exit 1
+[ ! -f "$1.zip" ] && echo "Downloaded file not found" && exit 1
+[ ! -d ~/.local/share/fonts ] && mkdir ~/.local/share/fonts -p
+unzip -q "$1.zip" -d ~/.local/share/fonts
+rm "$1.zip"
+fc-cache -f
+echo "done!"

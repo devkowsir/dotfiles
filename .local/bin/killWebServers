@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+pidof bun && kill -SIGINT $(pidof bun)
+pidof node && kill -SIGINT $(pidof node)

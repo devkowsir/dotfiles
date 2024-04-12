@@ -48,6 +48,8 @@ vnoremap <silent> <A-Tab> :exe "tabn ".g:lasttab<cr>
 vnoremap <Leader>as I0.<Space><Esc>gvg<C-a>
 " Uppercase a word in insert mode
 inoremap <c-u> <Esc>gUiwea
+" run current file script
+nnoremap <F2> :!./%<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""GENERAL OPTIONS""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

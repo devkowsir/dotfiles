@@ -14,6 +14,8 @@ vicmd_symbol = "[](bold #98C379)"
 
 [directory]
 style = "black #C678DD"
+truncation_length = 1
+read_only = " "
 
 
 [git_branch]

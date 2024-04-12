@@ -19,7 +19,10 @@ files=".config/alacritty/alacritty.yml
 .config/x11/Xresources
 .config/zsh/.zshrc
 .config/zsh/aliasrc
-.zprofile"
+.config/ranger/rc.conf
+.config/ranger/rifle.conf
+.zprofile
+.profile"
 
 file=$(printf "$files" | fzf)
 [ ! -z $file ] && nvim $HOME/$file

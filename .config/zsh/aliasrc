@@ -47,8 +47,10 @@ alias \
   gc="cd ~/.config/" \
   gb="cd ~/.local/bin" \
   gk="cd ~/.local/share/kawsar/" \
-  gp="cd ~/Projects/nextjs" \
-  gwp="cd ~/.local/share/kawsar/plugins" \
+  gpe="cd ~/Projects/Projects/express" \
+  gpm="cd ~/Projects/Projects/mern" \
+  gpn="cd ~/Projects/Projects/nextjs" \
+  gpr="cd ~/Projects/Projects/react" \
   gwt="cd ~/.local/share/kawsar/themes" \
   ggc="cd ~/.cache/dotfiles/.config" \
   gglb="cd ~/.cache/dotfiles/.local/bin" \
@@ -83,6 +85,13 @@ alias \
   trr="trash-restore"\
   trR="trash-rm"\
 
+# yarn
+alias "yarn"="yarn --prefer-offline"
+
+# PNPM
+alias \
+  "pnpm-add"="pnpm --prefer-offline add" \
+  "pnpm-add-D"="pnpm --prefer-offline add -D" \
 
 # Random
 alias \

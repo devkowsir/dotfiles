@@ -1,5 +1,5 @@
 # Source the basic config from .zprofile
-source $HOME/.zprofile
+[ "$Z_PROFILE_HAS_BEEN_SOURCED" != true ] && source $HOME/.zprofile
 
 # xwallpaper --zoom $XDG_CONFIG_HOME/wall.png
 # xrdb -merge $XDG_CONFIG_HOME/x11/Xresources
@@ -13,4 +13,4 @@ source $HOME/.zprofile
 # eval "$(ssh-agent -s)"
 # dunst &
 # killBrowserOnRamShortage
-ibus-daemon -drx
+ibus-daemon -rxRd

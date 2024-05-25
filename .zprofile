@@ -19,6 +19,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NPM_CONFIG_PREFIX="$HOME/.local/lib/npm"
+export YARN_CACHE_FOLDER="/run/media/kawsar/projects/.yarn"
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="$XDG_CONFIG_HOME/less/history"
@@ -37,7 +38,8 @@ export GOPATH="$XDG_DATA_HOME"/go
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 
 # Other program settings:
-export GTK_IM_MODULE="ibus"
+# export GTK_IM_MODULE="ibus"
+export GTK_IM_MODULE="xim"
 export QT_IM_MODULE="ibus"
 export XMODIFIERS="@im=ibus"
 export MAKEFLAGS="-j4"
@@ -56,3 +58,5 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
+
+export Z_PROFILE_HAS_BEEN_SOURCED=true

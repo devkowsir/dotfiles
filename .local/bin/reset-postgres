@@ -1,0 +1,12 @@
+#!/bin/sh
+
+[ ! "$(whoami)" = "root" ] && echo "run with superuser privileges." && exit 0
+
+systemctl stop postgresql.service 2>&1> /dev/null
+
+rm -rf /var/lib/postgres/*
+mkdir /var/lib/postgres/data/
+chown -R postgres:postgres /var/lib/postgres/data/
+sudo -u postgres initdb /var/lib/postgres/data --data-checksums
+
+systemctl start postgresql.service

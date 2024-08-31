@@ -1,0 +1,105 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: $0 -i <input_file> -d <%wx%h> [-p <lt|lc|lb|ct|cc|cb|rt|rc|rb|%x+%y>] [-q <number>] [-e <imagemagick_supported_format>] [-o <output_file>]" 1>&2;
+    exit 1
+}
+
+validate() {
+    regex="$1";
+    test_string="$2";
+    validation_fail_message="$3";
+    if ! [[ "$test_string" =~ $regex ]]; then
+        echo -e $validation_fail_message;
+        usage;
+    fi
+}
+
+handle_dimension() {
+    validate "^[1-9][0-9]*x[1-9][0-9]*$" $dimension "Invalid dimension. \n"
+}
+
+handle_extension() {
+    [ ! -z $extension ] && extension="$file_extension";
+}
+
+handle_input_file() {
+    [ -z "$input_file" ] && usage;
+    validate "image/*" `file -b --mime-type "$input_file"` "Input file is not an image.\n";
+    file_directory=`echo "$input_file" | grep -o "^.*/"`;
+    file_name=`echo "$input_file" | grep -o "[^/]*$" | grep -o "^[^.]*"`
+    file_extension=`echo "$input_file" | grep -o ".[^.]*$" | tr -d "."`
+    file_properties=`identify -format "%w,%h,%B,%Q" "$input_file"`
+    file_width=`echo $file_properties | cut -d, -f1`;
+    file_height=`echo $file_properties | cut -d, -f2`;
+    file_aspect_ratio="${file_width} / ${file_height}";
+    file_size=`echo $file_properties | cut -d, -f3`;
+    file_quality=`echo $file_properties | cut -d, -f4`;
+
+}
+
+handle_position() {
+    target_width=${dimension%x*};
+    target_height=${dimension#*x};
+
+    case $position in
+        lt) offset="0+0";;
+        lc) offset="0+$(( ( $file_height - $target_height ) / 2 ))";;
+        lb) offset="0+$(( $file_height - $target_height ))";;
+        ct) offset="$(( ( $file_width - $target_width ) / 2 ))+0";;
+        cc) offset="$(( ( $file_width - $target_width ) / 2 ))+$(( ( $file_height - $target_height ) / 2 ))";;
+        cb) offset="$(( ( $file_width - $target_width ) / 2 ))+$(( $file_height - $target_height ))";;
+        rt) offset="$(( $file_width - $target_width ))+0";;
+        rc) offset="$(( $file_width - $target_width ))+$(( ( $file_height - $target_height ) / 2 ))";;
+        rb) offset="$(( $file_width - $target_width ))+$(( $file_height - $target_height ))";;
+        *)
+            validate "^[0-9]+\+[0-9]+$" $position "Invalid position. \n"
+            offset=$position;
+            ;;
+    esac
+}
+
+handle_output_file() {
+    [ -z $output_file ] && output_file="${file_directory}${file_name}-${dimension}.${extension}"
+}
+
+handle_quality() {
+    if [ -z $quality ]; then
+        width_height=`identify -format "%wx%h" "$input_file"`;
+        size=`identify -format "%B" "$input_file"`;
+        quality=`identify -format "%Q" "$input_file"`;
+
+        magick "$input_file" -resize $width_height -quality "$quality" "/tmp/$input_file";
+
+        while [ $size -lt `identify -format "%B" "/tmp/$input_file"` ]; do
+            quality=$(( $quality - 1 ));
+            magick "$input_file" -resize $width_height -quality "$quality" "/tmp/$input_file";
+        done
+        rm "/tmp/$input_file";
+    fi
+}
+
+position="cc";
+
+while getopts :d:e:i:p:o:q: options 2>/dev/null;do
+    case $options in
+        d) dimension="$OPTARG";;
+        e) extension="$OPTARG";;
+        i) input_file="$OPTARG";;
+        p) position="$OPTARG";;
+        o) output_file="$OPTARG";;
+        q) quality="$OPTARG";;
+        *) usage;;
+    esac
+done
+
+handle_input_file;
+handle_dimension;
+handle_extension;
+handle_position;
+handle_quality;
+handle_output_file;
+
+echo using command: magick "$input_file" -crop "$dimension+$offset" -quality "$quality" "$output_file";
+magick "$input_file" -crop "$dimension+$offset" -quality "$quality" "$output_file";
+
